@@ -11,6 +11,6 @@ void main() {
   $pokemon, las caracteristicas de $pokemon, son: vida (hp) $hp
   Estiatus de vida: $isAlive.
   sus habilidades son: $habilities
-  y su apariencia es: $sprites
+  y su apariencia ess: $sprites
 """);
 }
