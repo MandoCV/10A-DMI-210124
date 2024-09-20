@@ -40,7 +40,7 @@ void main() {
   
   //reto 1 ovtener el valro idependiente d ela sssss
   
-  // Front: ${(pokemon['sprites'])[1]}  vv
+  // Front: ${(pokemon['sprites'])[1]}  vvss
     // Back: ${pokemon['sprites'][2]}  
     final tmp_sprites = pokemon['sprites'] as Map<int,String>;
   print("************************************************");
