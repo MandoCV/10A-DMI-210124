@@ -2,7 +2,7 @@ void main() {
   //1. Llamado de una funcion sin parametros
   greetEveryone();
   
-  //2. LLAMADO DE UNA FUNCION QUE RETORNA VALORES
+  //2. LLAMADO DE UNA FUNCION QUE RETORNA VALORESsss
   //A)  SIN ALMACENAR EL VALOR DE UNA VARIABLE
   print("hoy es el dia numero: ${getDayNumber()} del mes.");
   //B) ALAMACENADO EL VALOR DE LA FUNCION EN UNA NUEVA VARIABLE
