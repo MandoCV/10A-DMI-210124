@@ -16,7 +16,7 @@ Proyecto de Clase para la Unidad 1 de la  de Desarrollo Móvil Integral (DMI)
 |6|Mapas|6|Finalizada|
 |7|Listas, Iterables y Conjuntos de Datos|9|Finalizada|
 |8|Funciones y Parametros|10|Activa|
-
+|9|Clases y Sobreescritura de Métodos Nativos|9|Activa|
 ### LISTA DE HERRAMIENTAS
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 
