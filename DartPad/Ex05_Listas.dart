@@ -1,5 +1,5 @@
 void main() {
-  //La declaracion de una list exta limitada por corchetes (brackets) y cada elemento de ser individual y puede repetirse.aaaa
+  //La declaracion de una list exta limitada por corchetes (brackets) y cada elemento de ser individual y puede repetirse.aaaasss
   final numeros = [1, 2, 2, 2, 3, 4, 5, 6, 7, 7, 7, 7, 8, 8, 9, 10];
 
   print("Ejemplo de LIST: $numeros");
