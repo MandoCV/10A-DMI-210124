@@ -10,7 +10,7 @@ void main() {
   diaMes = getDayNumber();
   print("Entre tres dias sera: ${diaMes+3}");
 
-//3. LLAMADO DE UNA FUNCION CON SOLO PARAMETRO OBLIGATORIO
+//3. LLAMADO DE UNA FUNCION CON SOLO PARAMETRO OBLIGATORIOssss
 
 //A) LLAMADO CORRECTO
 print(greetSomeone("Mando"));
