@@ -33,7 +33,7 @@ class Square {
   // Getter para el lado (para que sea accesible externamente)
   double get side => _side;
 
-  // Método para calcular el área usando el valor de side
+  // Método para calcular el área usando el valor de sideee
   double calculateArea() {
     return _side * _side;
   }
