@@ -19,7 +19,7 @@ Proyecto de Clase para la Unidad 1 de la  de Desarrollo Móvil Integral (DMI)
 |9|Clases y Sobreescritura de Métodos Nativos|9|Finalizada|
 |10|Constructores Nombrados|8|Activa|
 |11|Getters (Lectura Controlada) y Setters (Modificación Controlada)|9|Activa|
-|12|Clases Abstractas|8||Activa|
+|12|Clases Abstractas|8|Activa|
 ### LISTA DE HERRAMIENTAS
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 
