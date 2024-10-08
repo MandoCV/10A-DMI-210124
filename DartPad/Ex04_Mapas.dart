@@ -38,7 +38,7 @@ void main() {
  }""");
   
   
-  //reto 1 ovtener el valro idependiente d ela ssssssss
+  //reto 1 ovtener el valro idependiente d ela sssssssssss
   
   // Front: ${(pokemon['sprites'])[1]}  vvss
     // Back: ${pokemon['sprites'][2]}  
