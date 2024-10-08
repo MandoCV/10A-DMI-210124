@@ -5,7 +5,7 @@ void main() {
   try {
     mySquare.side = -32; // Esto debería lanzar una excepción
   } catch (e) {
-    print(e); // Imprime el error de validación del setter
+    print(e); // Imprime el error de validación del setterss
   }
 
   print("""Lado del Cuadrado: ${mySquare.side}
