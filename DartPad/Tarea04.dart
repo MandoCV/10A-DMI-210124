@@ -1,10 +1,10 @@
-// Clase Abstracta Persona
+// 1. Definición de la Clase Abstracta <Persona>
 abstract class Persona {
   String nombre;
   String primerApellido;
   String? segundoApellido;
-  String genero;
-  String grupoSanguineo;
+  Genero genero;
+  GrupoSanguineo grupoSanguineo;
   DateTime fechaNacimiento;
   bool estaActivo;
   DateTime fechaRegistro;
@@ -20,6 +20,7 @@ abstract class Persona {
     DateTime? fechaRegistro,
   }) : fechaRegistro = fechaRegistro ?? DateTime.now();
 
+  // 2. Definición de la Función de la Clase (Método toString)
   @override
   String toString() {
     String estado = estaActivo ? "Activo" : "Inactivo";
@@ -27,9 +28,9 @@ abstract class Persona {
       -----------------------------------
       DATOS DE LA PERSONA
       -----------------------------------
-      Nombre: $nombre $primerApellido $segundoApellido
-      Género: $genero
-      Grupo Sanguíneo: $grupoSanguineo
+      Nombre: $nombre $primerApellido ${segundoApellido ?? ''}
+      Género: ${genero.toString().split('.').last}
+      Grupo Sanguíneo: ${grupoSanguineo.toString().split('.').last.replaceAll('Positivo', '+').replaceAll('Negativo', '-') }
       Fecha de nacimiento: ${fechaNacimiento.day.toString().padLeft(2, '0')}/${fechaNacimiento.month.toString().padLeft(2, '0')}/${fechaNacimiento.year}
       Estatus: $estado
       ------------------------------------
@@ -37,12 +38,29 @@ abstract class Persona {
   }
 }
 
-// Clase Paciente
+// Enum para Estatus Médico
+enum EstatusMedico { Vivo, Finado, Coma, Vegetativo }
+
+// Enum para Género
+enum Genero { M, F, NB }
+
+// Enum para Grupo Sanguineo
+enum GrupoSanguineo {
+  APositivo, // A+
+  ANegativo, // A-
+  BPositivo, // B+
+  BNegativo, // B-
+  OPositivo, // O+
+  ONegativo, // O-
+  ABPositivo, // AB+
+  ABNegativo, // AB-
+}
+
+// 3. Clase Paciente (extiende de Persona)
 class Paciente extends Persona {
   String nss; // Número de Seguro Social
   String tipoSeguro;
-  String estatusVida; // Ejemplo: "Vivo" o "Fallecido"
-  String estatusMedico; // Ejemplo: "Activo" o "Inactivo"
+  EstatusMedico estatusMedico; // Uso del enum
   DateTime? fechaAlta;
   DateTime? fechaUltimaCita;
 
@@ -50,13 +68,12 @@ class Paciente extends Persona {
     required String nombre,
     required String primerApellido,
     String? segundoApellido,
-    required String genero,
-    required String grupoSanguineo,
+    required Genero genero,
+    required GrupoSanguineo grupoSanguineo,
     required DateTime fechaNacimiento,
     required this.nss,
     required this.tipoSeguro,
-    this.estatusVida = "Vivo",
-    this.estatusMedico = "Activo",
+    this.estatusMedico = EstatusMedico.Vivo, // Valor por defecto
     this.fechaUltimaCita,
     DateTime? fechaAlta,
     bool estaActivo = true,
@@ -70,90 +87,130 @@ class Paciente extends Persona {
           grupoSanguineo: grupoSanguineo,
           fechaNacimiento: fechaNacimiento,
           estaActivo: estaActivo,
-          fechaRegistro: fechaRegistro ?? DateTime.now(), // Asegura que la fecha de registro sea correcta
+          fechaRegistro: fechaRegistro ?? DateTime.now(),
         );
 
-  void registrarDefuncion() {
-    estatusVida = "Fallecido";
-    estaActivo = false; // Se considera inactivo al fallecer
-    estatusMedico = "Inactivo"; // Actualiza el estatus médico al fallecer
-  }
-
+  // 4. Sobreescritura de la Propiedad de la Clase Abstracta <Persona>
   @override
   String toString() {
-    return super.toString() +
+    return super.toString() + // Sobreescritura de la Función
         """
       -----------------------------------
       DATOS DEL PACIENTE
       -----------------------------------
       NSS: $nss
       Tipo de Seguro: $tipoSeguro
-      Estatus de Vida: $estatusVida
-      Estatus Médico: $estatusMedico
-      Fecha de Alta: ${fechaAlta?.day.toString().padLeft(2, '0')}/${fechaAlta?.month.toString().padLeft(2, '0')}/${fechaAlta?.year} ${fechaAlta?.hour.toString().padLeft(2, '0')}:${fechaAlta?.minute.toString().padLeft(2, '0')}
+      Estatus Médico: ${estatusMedico.toString().split('.').last}
+      Fecha de Alta: ${fechaAlta != null ? '${fechaAlta!.day.toString().padLeft(2, '0')}/${fechaAlta!.month.toString().padLeft(2, '0')}/${fechaAlta!.year}' : 'No disponible'}
       Fecha Última Cita: ${fechaUltimaCita != null ? '${fechaUltimaCita!.day.toString().padLeft(2, '0')}/${fechaUltimaCita!.month.toString().padLeft(2, '0')}/${fechaUltimaCita!.year}' : 'No disponible'}
       Fecha de Registro: ${fechaRegistro.day.toString().padLeft(2, '0')}/${fechaRegistro.month.toString().padLeft(2, '0')}/${fechaRegistro.year} ${fechaRegistro.hour.toString().padLeft(2, '0')}:${fechaRegistro.minute.toString().padLeft(2, '0')}
       ------------------------------------
     """;
   }
+
+  // 5. Sobreescritura de la Función registrarDefuncion()
+  void registrarDefuncion() {
+    estatusMedico = EstatusMedico.Finado;
+    estaActivo = false; // Se considera inactivo al fallecer
+  }
 }
 
-// Ejemplo de uso (Casos de prueba)
+// 6. Gestor de Pacientes CRUD
+class GestorPacientes {
+  List<Paciente> pacientes = [];
+
+  // Método CRUD de la Clase (crear)
+  void crearPaciente(Paciente paciente) {
+    pacientes.add(paciente);
+  }
+
+  // Método para mostrar pacientes
+  void mostrarPacientes() {
+    if (pacientes.isEmpty) {
+      print('No hay pacientes registrados.');
+    } else {
+      pacientes.forEach((paciente) => print(paciente));
+    }
+  }
+
+  // Método CRUD de la Clase (consultar)
+  Paciente? consultarPaciente(String nss) {
+    try {
+      return pacientes.firstWhere(
+        (paciente) => paciente.nss == nss,
+      );
+    } catch (e) {
+      return null; // Si no encuentra, retorna null
+    }
+  }
+
+  //  Método CRUD de la Clase (actualizar)
+  void actualizarPaciente(String nss, Paciente nuevoPaciente) {
+    for (var i = 0; i < pacientes.length; i++) {
+      if (pacientes[i].nss == nss) {
+        pacientes[i] = nuevoPaciente;
+        break;
+      }
+    }
+  }
+
+  // Método CRUD de la Clase (eliminar)
+  void eliminarPaciente(String nss) {
+    pacientes.removeWhere((p) => p.nss == nss);
+  }
+}
+
 void main() {
-  // Caso 1: Paciente registrado hoy y dado de alta el mismo día
-  final pacienteNuevo = Paciente(
+  final gestor = GestorPacientes();
+
+  // 8. Caso de Prueba 1: Un paciente que se registra el día de hoy
+  print("Caso 1: Paciente que se registra el día de hoy.");
+  final paciente1 = Paciente(
     nombre: "Miranda",
     primerApellido: "Lebrao",
-    genero: "Mujer",
-    grupoSanguineo: "B+",
-    fechaNacimiento: DateTime.now().subtract(Duration(days: 24 * 365)), // 24 años
+    genero: Genero.F,
+    grupoSanguineo: GrupoSanguineo.BPositivo,
+    fechaNacimiento: DateTime(2000, 10, 9), // Fecha de nacimiento
     nss: "1234280383034",
     tipoSeguro: "Privado",
-    fechaAlta: DateTime.now(), // Fecha de alta como paciente
-    fechaRegistro: DateTime.now(), // Fecha de registro igual a la fecha de alta
+    fechaAlta: DateTime.now(),
+    fechaRegistro: DateTime.now(),
   );
+  gestor.crearPaciente(paciente1);
+  print(paciente1);
 
-  print("Caso 1: Paciente nuevo");
-  print(pacienteNuevo);
-
-  // Caso 2: Paciente ya registrado antes de su alta
-  final pacienteExistente = Paciente(
+  // 9. Caso de Prueba 2: Paciente nuevo que alguna vez fue trabajador del hospital
+  print("Caso 2: Paciente que alguna vez fue trabajador del hospital.");
+  final paciente2 = Paciente(
     nombre: "Gala",
     primerApellido: "Varo",
-    genero: "Mujer",
-    grupoSanguineo: "O+",
-    fechaNacimiento: DateTime.now().subtract(Duration(days: 28 * 365)), // 28 años
+    genero: Genero.F,
+    grupoSanguineo: GrupoSanguineo.OPositivo,
+    fechaNacimiento: DateTime(1996, 10, 9), // Fecha de nacimiento
     nss: "7538280389034",
     tipoSeguro: "Seguro Social",
-    fechaAlta: DateTime(2024, 1, 5), // Fecha de alta como paciente
-    fechaUltimaCita: DateTime(2024, 9, 15, 10, 0), // Fecha de última cita
-    estaActivo: true,
-    fechaRegistro:
-        DateTime(2020, 9, 12), // Fecha de registro anterior a la fecha de alta
+    fechaAlta: DateTime(2024, 1, 5),
+    fechaUltimaCita: DateTime(2024, 9, 15, 10, 0),
+    fechaRegistro: DateTime(2022, 12, 5),
   );
+  gestor.crearPaciente(paciente2);
+  print(paciente2);
 
-  print("\nCaso 2: Paciente ya registrado");
-  print(pacienteExistente);
-
-  // Caso 3: Paciente que acaba de fallecer
-  final pacienteFallecido = Paciente(
+  // 10. Caso de Prueba 3: Un paciente que acaba de fallecer
+  print("Caso 3: Paciente que acaba de fallecer.");
+  final paciente3 = Paciente(
     nombre: "RuPaul",
     primerApellido: "Charles",
-    genero: "Hombre",
-    grupoSanguineo: "A+",
-    fechaNacimiento: DateTime.now().subtract(Duration(days: 67 * 365)), // 67 años
+    genero: Genero.M,
+    grupoSanguineo: GrupoSanguineo.APositivo,
+    fechaNacimiento: DateTime(1957, 9, 17), // Fecha de nacimiento
     nss: "5538230389035",
-    tipoSeguro: "IMSS",
-    fechaAlta: DateTime(2023, 6, 15, 9, 15), // Fecha de alta como paciente
-    fechaUltimaCita: null, // No disponible
-    estaActivo: false,
-    fechaRegistro:
-        DateTime(2020, 9, 12), // Fecha de registro anterior a la fecha de alta
+    tipoSeguro: "Seguro Social",
+    fechaAlta: DateTime(2023, 6, 15, 9, 15),
+    fechaUltimaCita: DateTime.now(),
+    fechaRegistro: DateTime(2023, 5, 12),
   );
-
-  // Registrar defunción
-  pacienteFallecido.registrarDefuncion();
-
-  print("\nCaso 3: Paciente fallecido");
-  print(pacienteFallecido);
+  gestor.crearPaciente(paciente3);
+  paciente3.registrarDefuncion(); // Registrar defunción
+  print(paciente3); // Mostrar el paciente 3
 }
