@@ -1,3 +1,21 @@
+// Enum para Estatus Médico
+enum EstatusMedico { Vivo, Finado, Coma, Vegetativo }
+
+// Enum para Género
+enum Genero { M, F, NB }
+
+// Enum para Grupo Sanguíneo
+enum GrupoSanguineo {
+  APositivo, // A+
+  ANegativo, // A-
+  BPositivo, // B+
+  BNegativo, // B-
+  OPositivo, // O+
+  ONegativo, // O-
+  ABPositivo, // AB+
+  ABNegativo, // AB-
+}
+
 // 1. Definición de la Clase Abstracta <Persona>
 abstract class Persona {
   String nombre;
@@ -20,7 +38,6 @@ abstract class Persona {
     DateTime? fechaRegistro,
   }) : fechaRegistro = fechaRegistro ?? DateTime.now();
 
-  // 2. Definición de la Función de la Clase (Método toString)
   @override
   String toString() {
     String estado = estaActivo ? "Activo" : "Inactivo";
@@ -38,26 +55,13 @@ abstract class Persona {
   }
 }
 
-// Enum para Estatus Médico
-enum EstatusMedico { Vivo, Finado, Coma, Vegetativo }
-
-// Enum para Género
-enum Genero { M, F, NB }
-
-// Enum para Grupo Sanguineo
-enum GrupoSanguineo {
-  APositivo, // A+
-  ANegativo, // A-
-  BPositivo, // B+
-  BNegativo, // B-
-  OPositivo, // O+
-  ONegativo, // O-
-  ABPositivo, // AB+
-  ABNegativo, // AB-
+// 2. Definición de la Interfaz para registrar la defunción
+abstract class Defuncion {
+  void registrarDefuncion(); // Método abstracto para registrar defunciones
 }
 
-// 3. Clase Paciente (extiende de Persona)
-class Paciente extends Persona {
+// 3. Clase Paciente que implementa la interfaz Defuncion
+class Paciente extends Persona implements Defuncion {
   String nss; // Número de Seguro Social
   String tipoSeguro;
   EstatusMedico estatusMedico; // Uso del enum
@@ -90,7 +94,6 @@ class Paciente extends Persona {
           fechaRegistro: fechaRegistro ?? DateTime.now(),
         );
 
-  // 4. Sobreescritura de la Propiedad de la Clase Abstracta <Persona>
   @override
   String toString() {
     return super.toString() + // Sobreescritura de la Función
@@ -108,7 +111,8 @@ class Paciente extends Persona {
     """;
   }
 
-  // 5. Sobreescritura de la Función registrarDefuncion()
+  // 4.Implementación del método de la interfaz Defuncion
+  @override
   void registrarDefuncion() {
     estatusMedico = EstatusMedico.Finado;
     estaActivo = false; // Se considera inactivo al fallecer
@@ -160,10 +164,11 @@ class GestorPacientes {
   }
 }
 
+// 8, 9 y 10.- CASOS Pacientes
 void main() {
   final gestor = GestorPacientes();
 
-  // 8. Caso de Prueba 1: Un paciente que se registra el día de hoy
+  // Caso de Prueba 1: Un paciente que se registra el día de hoy
   print("Caso 1: Paciente que se registra el día de hoy.");
   final paciente1 = Paciente(
     nombre: "Miranda",
@@ -179,7 +184,7 @@ void main() {
   gestor.crearPaciente(paciente1);
   print(paciente1);
 
-  // 9. Caso de Prueba 2: Paciente nuevo que alguna vez fue trabajador del hospital
+  // Caso de Prueba 2: Paciente nuevo que alguna vez fue trabajador del hospital
   print("Caso 2: Paciente que alguna vez fue trabajador del hospital.");
   final paciente2 = Paciente(
     nombre: "Gala",
@@ -196,7 +201,7 @@ void main() {
   gestor.crearPaciente(paciente2);
   print(paciente2);
 
-  // 10. Caso de Prueba 3: Un paciente que acaba de fallecer
+  // Caso de Prueba 3: Un paciente que acaba de fallecer
   print("Caso 3: Paciente que acaba de fallecer.");
   final paciente3 = Paciente(
     nombre: "RuPaul",
@@ -213,4 +218,55 @@ void main() {
   gestor.crearPaciente(paciente3);
   paciente3.registrarDefuncion(); // Registrar defunción
   print(paciente3); // Mostrar el paciente 3
+
+  // Caso de Prueba 4: Actualizar el nombre de un paciente
+  print("Caso 4: Actualizar el nombre de un paciente.");
+  String nssParaActualizar = "7538280389034"; // NSS del paciente a actualizar
+
+  // Consultar el paciente actual
+  Paciente? pacienteActual = gestor.consultarPaciente(nssParaActualizar);
+  if (pacienteActual != null) {
+    // Crear un nuevo paciente con el nombre actualizado
+    final pacienteActualizado = Paciente(
+      nombre: "Gala Altagracia", // Nuevo nombre
+      primerApellido: pacienteActual.primerApellido,
+      segundoApellido: pacienteActual.segundoApellido,
+      genero: pacienteActual.genero,
+      grupoSanguineo: pacienteActual.grupoSanguineo,
+      fechaNacimiento: pacienteActual.fechaNacimiento,
+      nss: pacienteActual.nss,
+      tipoSeguro: pacienteActual.tipoSeguro,
+      estatusMedico: pacienteActual.estatusMedico,
+      fechaAlta: pacienteActual.fechaAlta,
+      fechaUltimaCita: pacienteActual.fechaUltimaCita,
+      fechaRegistro: pacienteActual.fechaRegistro,
+    );
+
+    // Actualizar el paciente en el gestor
+    gestor.actualizarPaciente(nssParaActualizar, pacienteActualizado);
+
+    print("Paciente actualizado:");
+    print(pacienteActualizado);
+  } else {
+    print("Paciente no encontrado.");
+  }
+
+  // Mostrar los pacientes después de la actualización
+  print("Pacientes registrados después de actualizar:");
+  gestor.mostrarPacientes();
+
+  // Caso de Prueba 5: Eliminar un paciente
+  print("Caso 5: Eliminar un paciente.");
+  print("Eliminar un paciente");
+  print(paciente3);
+
+  String nssParaEliminar = "5538230389035"; // Asegúrate de que el NSS sea un String
+
+
+  // Eliminar el paciente
+  gestor.eliminarPaciente(nssParaEliminar);
+
+  // Mostrar los pacientes después de la eliminación
+  print("Pacientes registrados después de eliminar:");
+  gestor.mostrarPacientes();
 }
