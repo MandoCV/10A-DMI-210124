@@ -19,10 +19,10 @@ Proyecto de Clase para la Unidad 1 de la  de Desarrollo Móvil Integral (DMI)
 |9|Clases y Sobreescritura de Métodos Nativos|9|Finalizada|
 |10|Constructores Nombrados|8|Finalizada|
 |11|Getters (Lectura Controlada) y Setters (Modificación Controlada)|9|Finalizada|
-|12|Clases Abstractas|11|Activa|
+|12|Clases Abstractas|11|Finalizada|
 |Tarea 04|Uso de las Clases Abstractas en el Caso de Estudio Hospital|10|Activa|
-|13|Aserciones|3|Activa|
-|14|Mixins|9|Activa|
+|13|Aserciones|3|Finalizada|
+|14|Mixins|9|Finalizada|
 ### LISTA DE HERRAMIENTAS
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 
