@@ -20,7 +20,7 @@ Proyecto de Clase para la Unidad 1 de la  de Desarrollo Móvil Integral (DMI)
 |10|Constructores Nombrados|8|Finalizada|
 |11|Getters (Lectura Controlada) y Setters (Modificación Controlada)|9|Finalizada|
 |12|Clases Abstractas|11|Finalizada|
-|Tarea 04|Uso de las Clases Abstractas en el Caso de Estudio Hospital|10|Activa|
+|Tarea 04|Uso de las Clases Abstractas en el Caso de Estudio Hospital|10|Finalizada|
 |13|Aserciones|3|Finalizada|
 |14|Mixins|9|Finalizada|
 ### LISTA DE HERRAMIENTAS
