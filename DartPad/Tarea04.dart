@@ -1,4 +1,5 @@
-import 'dart:math';
+//DESARROLLO MOVIL INTEGRAL - TAREA 4
+//Armando Carrasco Vargas - 210124 10A IDGS
 
 // Declaración del enum para estatus de vida
 enum EstatusVida { Vivo, Finado, Coma, Vegetativo }
@@ -58,7 +59,7 @@ abstract class Persona {
       DATOS DE LA PERSONA
       -----------------------------------
       ID: $id
-      Título: ${cortesyTitle ?? 'No disponible'}
+      Título: ${cortesyTitle ?? 'N/A'}
       Nombre: $nombre $primerApellido ${segundoApellido ?? ''}
       CURP: ${curp ?? 'No disponible'}
       Género: ${genero.toString().split('.').last}
@@ -264,6 +265,7 @@ void main() {
   print("Caso 2: Paciente que alguna vez fue trabajador del hospital.");
   final paciente2 = Paciente(
     id: 2,
+    cortesyTitle: "Dra.",
     nombre: "Gala",
     primerApellido: "Varo",
     curp: "VARG961009HDFRGA02", // Ejemplo de CURP
@@ -286,7 +288,7 @@ void main() {
   print("Caso 3: Paciente que acaba de fallecer.");
   final paciente3 = Paciente(
     id: 3,
-    cortesyTitle: "Doctor", // Si no se necesita, puedes dejarlo vacío
+    cortesyTitle: "Sr.", // Si no se necesita, puedes dejarlo vacío
     nombre: "RuPaul",
     primerApellido: "Charles",
     curp: "CHAR570917HDFRRP03", // Ejemplo de CURP
