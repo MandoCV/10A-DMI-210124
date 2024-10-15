@@ -26,7 +26,7 @@ void main() {
   Pokemons=$pokemons
   """);
 
-  print("***********************www*************************");
+  print("**********************************************");
   print(
       """Accediendo a las proppiedades del pokemon usando los braquets/corchetes []:
  ___________________________________
