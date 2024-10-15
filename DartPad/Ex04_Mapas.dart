@@ -38,14 +38,14 @@ void main() {
  }""");
   
   
-  //reto 1 ovtener el valro idependiente d ela sssssssssss
+  //reto 1 ovtener el valro idependiente d ela sssssssssss11ssss
   
   // Front: ${(pokemon['sprites'])[1]}  vvss
     // Back: ${pokemon['sprites'][2]}  
     final tmp_sprites = pokemon['sprites'] as Map<int,String>;
   print("************************************************");
   print(
-      """Accediendo a las proppiedades del pokemon usando los braquets/corchetes []:
+      """Accediendo a las proppiedades del pokemon usando los braquets/corchetesss []:
  ___________________________________
  Nombre= ${pokemon['Name']}
  HP=${pokemon['HP']}
