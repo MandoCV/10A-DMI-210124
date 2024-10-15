@@ -45,7 +45,7 @@ void main() {
     final tmp_sprites = pokemon['sprites'] as Map<int,String>;
   print("************************************************");
   print(
-      """Accediendo a las proppiedades del pokemon usando los braquets/corchetesss []:
+      """Accediendo a las proppiedades del pokemon usando los braquets/corchetessssss []:
  ___________________________________
  Nombre= ${pokemon['Name']}
  HP=${pokemon['HP']}
